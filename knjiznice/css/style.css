@@ -1,0 +1,83 @@
+h4, h2, h5 {
+    font-family: 'Gudea', bold;
+    font-size: 34px;
+    color: 	black;
+}
+
+p {
+    font-family: 'Gudea', bold;
+    font-size: 23px;
+    color: 	black;
+}
+
+body {
+    font-family: 'Gudea', bold;
+    text-align: left;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: black;
+    padding-top: 70px;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+}
+
+.container {
+    font-size: 23px;
+}
+
+.okej {
+    font-family: 'Gudea', bold;
+    font-size: 28px;
+}
+.nokej {
+    font-family: 'Gudea';
+    font-size: 23px;
+}
+
+.panel {
+    border-style: none;
+    background-color: transparent;
+    color: black;
+    font-size: 23px;
+    font-style: normal;
+}
+
+.panel-heading{
+    border-style: none;
+    background-color: transparent;
+}
+
+.label {
+    border-style: none;
+    background-color: transparent;
+    color: black;
+    font-size: 23px;
+    font-style: normal;
+}
+
+.panel-body {
+    border-style: none;
+    background-color: transparent;
+    color: black;
+    font-size: 23px;
+    font-style: normal;
+}
+
+#ars {
+ float: left;
+}
+
+#map {
+    width: 80%;
+    height: 400px;
+}
+
+

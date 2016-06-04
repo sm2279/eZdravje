@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <title>eZdravje :: 4. DN :: OIS 2015/2016</title>
   <link href="knjiznice/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {padding-top: 70px;}
-  </style>
+  <link href="knjiznice/css/style.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco|Gudea' rel='stylesheet' type='text/css'>
+
   <script src="knjiznice/js/jquery-2.2.3.min.js"></script>
   <script src="knjiznice/js/bootstrap.min.js"></script>
   <script src="knjiznice/js/koda.js"></script>
-</head>
-<body>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX8OK0dcZsXp_vQsOJrF2DKiTYtGLX0oY&libraries=places&callback=initMap" async defer></script></head>
+<body background="http://www.freedownwallpaper.com/wp-content/uploads/2015/12/white-marble-background-wallpaperwhitemarble-1900x1200.jpg">
 
   <!-- ZAČETEK: Menujska vrstica na vrhu spletne strani -->
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -22,28 +22,138 @@
           <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
         </button>
         <!-- ZAČETEK: Ime vaše aplikacije -->
-        <a class="navbar-brand" href="index.html">{ime vaše aplikacije}</a>
+        <a class="okej navbar-brand" href="index.html">CALCULATE YOUR MACROS</a>
         <!-- KONEC: Ime vaše aplikacije -->
       </div>
-      <div class="collapse navbar-collapse" id="menujska-vrstica">
+      <div class="nokej collapse navbar-collapse" id="menujska-vrstica">
         <ul class="nav navbar-nav">
           <li><a href="opis.html">Opis ideje</a></li>
           <li><a href="nacrt.html">Načrt informacijske rešitve</a></li>
-          <li><a href="#">Generiranje podatkov</a></li>
+          <li><a href="#" onclick="generiraj()">Generiranje podatkov</a></li>
         </ul>
       </div>
     </div>
   </nav>
   <!-- KONEC: Menujska vrstica na vrhu spletne strani -->
-
-  <!-- ZAČETEK: Vsebina aplikacije -->
+  <br>
+  <br>
+  <br>
+  
   <div class="container">
     <div class="row">
-      <div class="col-lg-12 text-center">
-        <p class="lead"><strong>TO-DO</strong>: Na tem mestu implementirajte vašo aplikacijo.</p>
+      <div class="col-lg-11 col-md-9 col-sm-12">
+        <h5><b>WHAT ARE MACROS?</b></h5><br>
+        <p>Nutrients are substances used for energy, growth, and bodily functions by organisms. They are found in foods and drinks. Depending on the nutrient, these substances are needed in smaller or larger amounts. Those that are needed in large amounts are called macronutrients or macros.
+            There are <b>three macronutrients</b> required by humans: <b>carbohydrates</b>, <b>fats</b>, and <b>proteins</b>. Each of these macronutrients provides energy in the form of calories. For example:
+            <br>
+            <li style="text-indent: 50px" >In carbohydrates, there are 4 calories per gram</li>
+            <li style="text-indent: 50px">In proteins, there are 4 calories per gram</li>
+            <li style="text-indent: 50px">And in fats, there are 9 calories per gram</li>
+            <p> </p>
+            This means that if you look at a food label and it lists 10 grams of carbohydrates, 0 grams of protein, and 0 grams of fat, that food would contain 40 calories.
+            <br>
+            <br> 
+            <b>This app will calculate your:</b> 
+              <li style="text-indent: 50px" > <b>BMR</b> (Basal Metabolic Rate), which is an estimate of how many calories your body would burn, if you <p style="text-indent: 70px">were to do nothing but rest for 24 hours,</p></li>
+              <li style="text-indent: 50px" ><b>TDEE</b> (Total Daily Energy Expenditure), which is the number of calories your body needs to function <p style="text-indent: 70px">in a day, based on your activity level and other personal information,</p></li>
+              <li style="text-indent: 50px" >Your recommended <b>macronutrients</b> per day and per meal.</li>
+          <br>
+        </p>
+      </div>
+  </div>
+  
+  
+  <!-- ZAČETEK: Vsebina aplikacije -->
+  <div class="container" id="yolo">
+    <div class="row">
+      <h4><b>CALCULATE MACROS</b></h4><br>
+      <div class="col-lg-12">
+        <div class="row">
+			<div class="col-lg-10 col-md-8 col-sm-8">
+				<div class="panel panel-default">
+					<div class="panel-body">
+							<div class="col-lg-2 col-md-2 col-sm-2"><span class="label label-default" align="left">Izberi osebo</span></div>
+							<div class="col-lg-5 col-md-5 col-sm-3"><select class="form-control input-sm" id="preberiPredlogoBolnika"><option value=""></option>></select></div><br>
+						  <br>
+							<span class="label label-default" align="left">EHR ID</span><input id="preberiEHRid" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
+						  <button type="button" class="btn btn-primary btn-xs" onclick=preberiEHRodBolnika1()>Preberi osnovne podatke o osebi</button><span id="preberiSporocilo"></span>
+				  	
+				  </div>
+					<div class="panel-body">
+						<span class="label label-default">Name</span><input id="kreirajIme" type="text" class="form-control input-mini" placeholder="Borut"><br>
+						<span class="label label-default">Last name</span><input id="kreirajPriimek" type="text" class="form-control" placeholder="Pahor"><br>
+						<span class="label label-default">Date of birth</span><input id="kreirajDatumRojstva" type="text" class="form-control" placeholder="1957-03-10T09:08"><br>
+						<span class="label label-default">Height</span><input id="kreirajVisino" type="text" class="form-control" placeholder="184"><br>
+						<span class="label label-default">Weight</span><input id="kreirajTezo" type="text" class="form-control" placeholder="75 kg"><br>
+					  <span class="label label-default" id="ars">Activity level</span><p><small>1 - sedentary, 2 - lightly active, 3 - moderately active, 4 - very active</small></p><input id="kreirajStopnjoAktivnosti" type="text" class="form-control" placeholder="3"><br>
+						<span class="label label-default"id="ars">Goal</span><p><small>1 - weight loss, 2 - maintain, 3 - weight gain</small></p><input id="kreirajCilj" type="text" class="form-control" placeholder="1"><br>
+						<br>
+						<button type="button" class="btn btn-primary btn-lg" onclick=calculate()>Calculate</button><span id="preberiSporocilo"></span>
+
+				  </div>
+				</div>
+			</div>
+			</div>
+		</div>
       </div>
     </div>
   </div>
+  
+  <div class="container">
+    <h4><b>YOUR PLAN</b></h4><br>
+
+      <p id="bmr">BMR:</p>
+      <p id="tdee">TDEE:</p>
+      
+      <div id="tabela">
+      
+      </div>
+      
+     <div class="row" style="padding-top: 70px;">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <h4>PROTEIN</h4>
+        <p>Stick to lean meats and fish. <br><br>
+        <b>Here are some food suggestions:</b>
+          <li>Greek yogurt</li>
+          <li>Cottage cheese</li>
+          <li>Eggs</li>
+          <li>Meats</li>
+          <li>Fish</li>
+          <li>Legumes and beans</li>
+          <li>Nuts</li>
+        </p>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <h4>CARBOHYDRATES</h4>
+        <p>Stick to natural and unprocessed foods. <br><br>
+         <b>Here are some food suggestions:</b>
+          <li>Vegetables</li>
+          <li>Fruits</li>
+          <li>Oats</li>
+          <li>Rice</li>
+          <li>Whole grain breads</li>
+          <li>Whole grain pastas</li>
+          <li>Potatoes</li>
+        </p>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <h4>FATS</h4>
+        <p>Stay away from fried foods. <br><br>
+        <b>Here are some food suggestions:</b>
+          <li>Salmon</li>
+          <li>Anchovies</li>
+          <li>Tuna</li>
+          <li>Algae</li>
+          <li>Nuts and seeds</li>
+          <li>Oils (Coconut, Olive)</li>
+          <li>Avocado</li>
+        </p>
+      </div>
+    </div><br><br>
+      <p>Here are some restaurants you can visit in the area of Ljubljana</p><br>
+    </div>
+  </div>
+  <div id="map" style="width:100%; height:320px;"></div>
   <!-- KONEC: Vsebina aplikacije -->
 
 </body>
