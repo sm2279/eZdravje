@@ -7,11 +7,12 @@
   <link href="knjiznice/css/style.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco|Gudea' rel='stylesheet' type='text/css'>
 
+  <script src="knjiznice/js/d3.v3.min.js"></script>
   <script src="knjiznice/js/jquery-2.2.3.min.js"></script>
   <script src="knjiznice/js/bootstrap.min.js"></script>
   <script src="knjiznice/js/koda.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX8OK0dcZsXp_vQsOJrF2DKiTYtGLX0oY&libraries=places&callback=initMap" async defer></script></head>
-<body background="http://www.freedownwallpaper.com/wp-content/uploads/2015/12/white-marble-background-wallpaperwhitemarble-1900x1200.jpg">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX8OK0dcZsXp_vQsOJrF2DKiTYtGLX0oY&libraries=places&callback=initMap" async defer></script></head>
+  <body background="http://www.freedownwallpaper.com/wp-content/uploads/2015/12/white-marble-background-wallpaperwhitemarble-1900x1200.jpg">
 
   <!-- ZAČETEK: Menujska vrstica na vrhu spletne strani -->
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -76,7 +77,7 @@
 							<div class="col-lg-5 col-md-5 col-sm-3"><select class="form-control input-sm" id="preberiPredlogoBolnika"><option value=""></option>></select></div><br>
 						  <br>
 							<span class="label label-default" align="left">EHR ID</span><input id="preberiEHRid" type="text" class="form-control input-mini" placeholder="7b661e12-3a98-21ad-c29e-2dc9f5a3d885">
-						  <button type="button" class="btn btn-primary btn-xs" onclick=preberiEHRodBolnika1()>Preberi osnovne podatke o osebi</button><span id="preberiSporocilo"></span>
+						  <button type="button" class="btn btn-primary btn-xs" onclick=preberiPodatkeOsebe1()>Preberi osnovne podatke o osebi</button><span id="preberiSporocilo"></span>
 				  	
 				  </div>
 					<div class="panel-body">
@@ -109,10 +110,17 @@
       
       </div>
       
-     <div class="row" style="padding-top: 70px;">
+      <div id="tabela2" style="margin:0 auto; padding-top:50px;">
+        
+        </div>
+        <br><br>
+  <p>Click on a macronutrient, to see a more detailed description:</p>
+     <div id="taku" style="padding-top: 40px;">
+       
       <div class="col-lg-4 col-md-4 col-sm-12">
-        <h4>PROTEIN</h4>
-        <p>Stick to lean meats and fish. <br><br>
+        <a href="#taku" onclick="show('opis_protein')"><h4>PROTEIN</h4></a>
+        <div id="opis_protein">
+        <p>Protein is essential for muscle growth and regeneration.<br><br>
         <b>Here are some food suggestions:</b>
           <li>Greek yogurt</li>
           <li>Cottage cheese</li>
@@ -121,11 +129,11 @@
           <li>Fish</li>
           <li>Legumes and beans</li>
           <li>Nuts</li>
-        </p>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-12">
-        <h4>CARBOHYDRATES</h4>
-        <p>Stick to natural and unprocessed foods. <br><br>
+        </p><br>
+        </div>
+        <a href="#taku" onclick="show('opis_carbs')"><h4>CARBOHYDRATES</h4></a>
+        <div id="opis_carbs">
+        <p>Carbohydrates are essential for normal brain function and energy.<br><br>
          <b>Here are some food suggestions:</b>
           <li>Vegetables</li>
           <li>Fruits</li>
@@ -134,11 +142,11 @@
           <li>Whole grain breads</li>
           <li>Whole grain pastas</li>
           <li>Potatoes</li>
-        </p>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-12">
-        <h4>FATS</h4>
-        <p>Stay away from fried foods. <br><br>
+        </p><br>
+        </div>
+        <a href="#taku" onclick="show('opis_fats')"><h4>FATS</h4></a>
+        <div id="opis_fats">
+        <p>Fats are essential for healthy skin, hair and organ function.<br><br>
         <b>Here are some food suggestions:</b>
           <li>Salmon</li>
           <li>Anchovies</li>
@@ -148,11 +156,13 @@
           <li>Oils (Coconut, Olive)</li>
           <li>Avocado</li>
         </p>
+        </div>
       </div>
-    </div><br><br>
-      <p>Here are some restaurants you can visit in the area of Ljubljana</p><br>
+    </div>
+      
     </div>
   </div>
+  <div id="mt"><p>Here are some food related destinations in the area of Ljubljana that you can visit.</p><br></div>
   <div id="map" style="width:100%; height:320px;"></div>
   <!-- KONEC: Vsebina aplikacije -->
 

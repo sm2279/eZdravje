@@ -174,12 +174,12 @@ function generiraj(){
     generirajPodatke(3);
 }
 
-function preberiEHRodBolnika1() {
+function preberiPodatkeOsebe1() {
 	var ehrId = $("#preberiEHRid").val();
-	preberiEHRodBolnika(ehrId);
+	preberiPodatkeOsebe(ehrId);
 }
 
-function preberiEHRodBolnika(ehrId) {
+	function preberiPodatkeOsebe(ehrId) {
 	sessionId = getSessionId();
 
 	if (!ehrId || ehrId.trim().length == 0) {
@@ -277,7 +277,42 @@ function calculate() {
                     "</tr><tr data-label='Grams per Meal'><td>Grams per Meal</td><td id='carbs_per_meal'>"+ Math.round(carbs/3) + "</td>"+
                      "   <td id='protein_per_meal'>"+ Math.round(protein/3) + "</td><td id='fat_per_meal'>"+ Math.round(fat/3) + "</td>"+
                       "  <td id='calories_per_meal' class='macro_calories'>"+ Math.round(tdee*factor/3) + "</td> </tr></tbody></table>");
+                      
+    data = {
+            labels: [
+              'Carbohydrates', 'Proteins', 'Fats',
+              'Calories'
+            ],
+            series: [
+              {
+                label: 'Your plan',
+                values: [Math.round(carbs),Math.round(protein),Math.round(fat),Math.round(tdee*factor)]
+              },
+              {
+                label: 'Average',
+                values: [350, 150, 70, 2500]
+              },]
+          };
+	document.getElementById("tabela2").style.display = 'block';
+	$("#tabela2").load("tabela.html");
 }
+
+
+var data = {
+labels: [
+  'Carbohydrates', 'Proteins', 'Fats',
+  'Calories'
+],
+series: [
+  {
+    label: 'Your plan',
+    values: [4, 8, 15, 16]
+  },
+  {
+    label: 'Average',
+    values: [350, 150, 70, 2500]
+  },]
+};
 
 function getGoalFactor(goal){
         switch (goal) {
@@ -333,12 +368,23 @@ function getAge(dateString)
     return age;
 }
 
+function show(elementID){
+	document.getElementById("opis_fats").style.display = 'none';  
+	document.getElementById("opis_carbs").style.display = 'none';  
+	document.getElementById("opis_protein").style.display = 'none'; 
+	document.getElementById(elementID).style.display = 'block'; 
+}
+
 $(document).ready(function() {
+	document.getElementById("opis_fats").style.display = 'none';  
+	document.getElementById("opis_carbs").style.display = 'none';  
+	document.getElementById("opis_protein").style.display = 'none';  
+	document.getElementById("tabela2").style.display = 'none';  
 
   $('#preberiPredlogoBolnika').change(function() {
   	
     var podatki = $(this).val().split(",");
-	preberiEHRodBolnika(podatki[0]);
+	preberiPodatkeOsebe(podatki[0]);
   });
 });
 
@@ -382,3 +428,4 @@ function createMarker(place) {
     infowindow.open(map, this);
   });
 }
+

@@ -80,4 +80,42 @@ th, td {
     height: 400px;
 }
 
+#mt {
+    position: relative;
+    left: 400px;
+    padding-top: 50px;
+}
+#taku {
+    position: relative;
+    left: 400px;
+}
 
+.chart .legend {
+  fill: black;
+  font: 14px sans-serif;
+  text-anchor: start;
+  font-size: 12px;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+.chart .label {
+  fill: black;
+  font: 14px sans-serif;
+  text-anchor: end;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
